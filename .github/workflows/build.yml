@@ -1,0 +1,18 @@
+
+package=git
+version=2.17.0
+
+tarUrl=https://mirrors.edge.kernel.org/pub/software/scm/git/$package-$version.tar.gz
+install(){
+   ./configure --prefix=$HOME
+   LDFLAGS="-L$HOME/lib" CFLAGS="-I$HOME/include" make -j 2
+   make install
+}
+if [ -e $package-$version.tar.gz ]; then
+   echo "cache"
+else
+   wget --no-check-certificate ${tarUrl}
+   tar -xvf $package-$version.tar.gz
+fi
+cd ./$package-$version
+install
