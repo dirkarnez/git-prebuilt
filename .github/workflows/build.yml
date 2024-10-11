@@ -60,7 +60,7 @@ jobs:
             g++ --version &&  \
             ./configure --help && \
             ./configure --prefix="$(pwd)/${{ env.installationPath }}"  && \
-            LDFLAGS="-L$HOME/lib" CFLAGS="-I$HOME/include" make -j 2 && \
+            LDFLAGS="-L$HOME/lib" CFLAGS="-g2 -O2 -m64 -march=native -I$HOME/include" make -j 2 && \
             make install
          
       - name: Archive Release
